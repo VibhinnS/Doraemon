@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Manrope", sans-serif;
+    font-family: "Work Sans", sans-serif;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+
+}
+
+.header{
+    min-height: 100vh;
+    background-position: center;
+    background-color: #000;
+    background-size: cover;
+    position: relative;
+}
+
+.main-heading-text{
+    font-weight: bolder;
+    padding-top: 50px;
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.output{
+    color: white;
+    background-color: black;
+    font-family: Poppins, sans-serif;
+}

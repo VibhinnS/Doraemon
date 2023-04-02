@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/result.css')}}">
+    <title>Script Output</title>
+  </head>
+  <body>
+    <section class="header">
+        <div class="hero-section">
+            <h1 class="main-heading-text"><center>Use Your Hand Gesturs To Control The Tello Drone</center></h1>
+        </div>
+    </section>
+    <section class="body">
+        <div class="output">
+            <pre>{{ output }}</pre>
+        </div>
+    </section>
+  </body>
+</html>
