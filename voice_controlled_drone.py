@@ -5,7 +5,7 @@ import cv2
 import time
 
 
-img = cv2.imread(r'C:\Users\Vibhinn Singhal\BFF(test)\images\black_bg.jpg')
+img = cv2.imread(r'images/black_bg.jpg')
 
 try:
     drone = Tello()
@@ -25,7 +25,7 @@ with open(classFile, 'rt') as f:
     print()
     print()
 
-model= Model(r"C:\Users\Vibhinn Singhal\BFF(test)\vosk-model-small-en-in-0.4\vosk-model-small-en-in-0.4")
+model= Model(r"vosk-model-small-en-in-0.4/vosk-model-small-en-in-0.4")
 recognizer = KaldiRecognizer(model, 16000)
 
 
@@ -37,7 +37,10 @@ def main():
     speed = 40
     lr = fb = ud = 0
     while True:
-        data = stream.read(4896)
+        data = stream.read(4096)
+        cv2.putText(img, f"Battery : {drone.get_battery()}%", (170,30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 1, cv2.LINE_AA)
+        cv2.imshow('Image', img)
+        # cv2.waitKey(1)
         img[:] = (0, 0, 0)
         if recognizer.AcceptWaveform(data):
             text = recognizer.Result()
@@ -45,39 +48,38 @@ def main():
             command = text[14:-3]
             command = command.lower()
             cv2.putText(img, command, (64,100), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 255, 0), 2, cv2.LINE_AA)
-            cv2.putText(img, f"Battery : {drone.get_battery()}%", (170,30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 1, cv2.LINE_AA)
 
             cv2.imshow('Image', img)
             cv2.waitKey(1)
 
             if command == "exit":
                 break
-            if command == "land":
+            if "land" in command:
                 drone.land()
                 break
 
-            elif command == "take off":
+            elif "take off" in command:
                 drone.takeoff()
 
-            elif command == "forward":
+            elif "forward" in command:
                 fb = speed
 
-            elif command == "backward":
+            elif "backward" in command:
                 fb = -speed
 
-            elif command == "left":
+            elif "left" in command:
                 lr = -speed
 
-            elif command == "right":
+            elif "right" in command:
                 lr = speed
 
-            elif command == "up":
+            elif "up" in command:
                 ud = speed
 
-            elif command == "down":
+            elif "down" in command:
                 ud = -speed
 
-            elif command == "flip":
+            elif "flip" in command:
                 drone.flip_left()
 
             # send_rc_control(left_right_velocity, forward_backward_velocity, up_down_velocity, yaw_velocity)
