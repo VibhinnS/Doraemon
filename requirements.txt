@@ -1,0 +1,8 @@
+djitellopy
+mediapipe
+tensorflow
+numpy
+pandas
+pyaudio
+vosk
+flask
